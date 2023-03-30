@@ -1,0 +1,8 @@
+version: '3.8'
+
+services:
+    react1:
+      container_name: 'docker-react'
+      build: .
+      ports:
+          - "9000:9000"
