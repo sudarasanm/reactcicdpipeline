@@ -1,0 +1,37 @@
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: reactjs-app
+  namespace: default
+  labels:
+    app: reactjs-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: reactjs-app
+  template:
+    metadata:
+      labels:
+        app: reactjs-app
+    spec:
+      containers:
+      - name: reactjs-app
+        image: "sudrsan/cicdpipelinereact"
+        ports:
+          - containerPort: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: reactjs-app
+  namespace: default
+spec:
+  selector:
+    app: reactjs-app
+  type: LoadBalancer
+  ports:
+  - name: http
+    targetPort: 3000
+    port: 80
